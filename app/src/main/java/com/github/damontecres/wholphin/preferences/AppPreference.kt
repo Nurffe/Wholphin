@@ -476,6 +476,18 @@ sealed interface AppPreference<Pref, T> {
                 summaryOff = R.string.disabled,
             )
 
+        val PreferFmp4Container =
+            AppSwitchPreference<AppPreferences>(
+                title = R.string.prefer_fmp4_container,
+                defaultValue = false,
+                getter = { it.playbackPreferences.overrides.preferFmp4Container },
+                setter = { prefs, value ->
+                    prefs.updatePlaybackOverrides { preferFmp4Container = value }
+                },
+                summaryOn = R.string.enabled,
+                summaryOff = R.string.disabled,
+            )
+
         val RememberSelectedTab =
             AppSwitchPreference<AppPreferences>(
                 title = R.string.remember_selected_tab,
@@ -1070,6 +1082,7 @@ private val ExoPlayerSettings =
         AppPreference.DirectPlayPgs,
         AppPreference.DirectPlayDoviProfile7,
         AppPreference.DecodeAv1,
+        AppPreference.PreferFmp4Container,
     )
 
 val ExoPlayerPreferences =

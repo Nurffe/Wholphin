@@ -71,6 +71,7 @@ fun createDeviceProfile(
     dolbyVisionELDirectPlay: Boolean,
     decodeAv1: Boolean,
     jellyfinTenEleven: Boolean,
+    preferFmp4Container: Boolean,
 ) = buildDeviceProfile {
     val allowedAudioCodecs =
         when {
@@ -136,7 +137,7 @@ fun createDeviceProfile(
         type = DlnaProfileType.VIDEO
         context = EncodingContext.STREAMING
 
-        container = Codec.Container.TS
+        container = if (preferFmp4Container) Codec.Container.MP4 else Codec.Container.TS
         protocol = MediaStreamProtocol.HLS
 
         if (supportsHevc) videoCodec(Codec.Video.HEVC)
